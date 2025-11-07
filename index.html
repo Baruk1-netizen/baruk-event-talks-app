@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Talks Today</title>
+    <style>
+body {
+    font-family: sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+}
+
+main {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+}
+
+.search-container {
+    margin-bottom: 1rem;
+}
+
+#search {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+
+.schedule-container .talk {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    padding: 1rem;
+}
+
+.schedule-container .talk h2 {
+    margin-top: 0;
+}
+
+.schedule-container .talk .time {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.schedule-container .talk .speakers {
+    font-style: italic;
+    margin-bottom: 0.5rem;
+}
+
+.schedule-container .talk .category {
+    display: inline-block;
+    background-color: #eee;
+    border-radius: 3px;
+    padding: 0.25rem 0.5rem;
+    margin-right: 0.5rem;
+    font-size: 0.8rem;
+}
+
+.schedule-container .break {
+    background-color: #eee;
+    text-align: center;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Tech Talks Today</h1>
+        <p>A one-day event of inspiring tech talks.</p>
+    </header>
+    <main>
+        <div class="search-container">
+            <input type="text" id="search" placeholder="Search by category...">
+        </div>
+        <div id="schedule" class="schedule-container"></div>
+    </main>
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const scheduleContainer = document.getElementById('schedule');
+    const searchInput = document.getElementById('search');
+    const data = {
+  "talks": [
+    {
+      "title": "The Future of Artificial Intelligence",
+      "speakers": ["Dr. Evelyn Reed"],
+      "category": ["AI", "Machine Learning"],
+      "description": "A deep dive into the future of AI and its potential impact on society."
+    },
+    {
+      "title": "Building Scalable Web Applications",
+      "speakers": ["John Doe", "Jane Smith"],
+      "category": ["Web Development", "Scalability"],
+      "description": "Learn how to build web applications that can handle millions of users."
+    },
+    {
+      "title": "Cybersecurity in the Modern Age",
+      "speakers": ["Dr. Alan Grant"],
+      "category": ["Cybersecurity"],
+      "description": "An overview of the latest threats and how to protect your systems."
+    },
+    {
+      "title": "The Power of Quantum Computing",
+      "speakers": ["Dr. Ian Malcolm"],
+      "category": ["Quantum Computing", "Physics"],
+      "description": "Exploring the mind-bending world of quantum computers and their potential."
+    },
+    {
+      "title": "Blockchain and Decentralized Finance",
+      "speakers": ["Satoshi Nakamoto"],
+      "category": ["Blockchain", "Finance"],
+      "description": "A look at the technology behind cryptocurrencies and the future of finance."
+    },
+    {
+      "title": "Human-Computer Interaction",
+      "speakers": ["Dr. Ellie Sattler"],
+      "category": ["HCI", "UX"],
+      "description": "Designing interfaces that are intuitive and user-friendly."
+    }
+  ]
+};
+    let talks = data.talks;
+    renderSchedule(talks);
+
+    searchInput.addEventListener('input', () => {
+        const searchTerm = searchInput.value.toLowerCase();
+        const filteredTalks = talks.filter(talk => 
+            talk.category.some(cat => cat.toLowerCase().includes(searchTerm))
+        );
+        renderSchedule(filteredTalks);
+    });
+
+    function renderSchedule(talksToRender) {
+        scheduleContainer.innerHTML = '';
+        let startTime = new Date('2025-11-07T10:00:00');
+
+        talksToRender.forEach((talk, index) => {
+            if (index === 3) {
+                const lunchBreak = document.createElement('div');
+                lunchBreak.className = 'break';
+                const lunchStart = new Date(startTime.getTime());
+                const lunchEnd = new Date(lunchStart.getTime() + 60 * 60 * 1000);
+                lunchBreak.innerHTML = `Lunch Break: ${formatTime(lunchStart)} - ${formatTime(lunchEnd)}`;
+                scheduleContainer.appendChild(lunchBreak);
+                startTime = lunchEnd;
+            }
+
+            const talkElement = document.createElement('div');
+            talkElement.className = 'talk';
+
+            const talkStart = new Date(startTime.getTime());
+            const talkEnd = new Date(talkStart.getTime() + 60 * 60 * 1000);
+
+            talkElement.innerHTML = `
+                <div class="time">${formatTime(talkStart)} - ${formatTime(talkEnd)}</div>
+                <h2>${talk.title}</h2>
+                <div class="speakers">${talk.speakers.join(', ')}</div>
+                <div class="categories">${talk.category.map(cat => `<span class="category">${cat}</span>`).join('')}</div>
+                <p>${talk.description}</p>
+            `;
+            scheduleContainer.appendChild(talkElement);
+
+            startTime = new Date(talkEnd.getTime() + 10 * 60 * 1000); // 10 minute break
+        });
+    }
+
+    function formatTime(date) {
+        return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+});
+    </script>
+</body>
+</html>

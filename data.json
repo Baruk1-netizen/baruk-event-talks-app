@@ -1,0 +1,40 @@
+{
+  "talks": [
+    {
+      "title": "The Future of Artificial Intelligence",
+      "speakers": ["Dr. Evelyn Reed"],
+      "category": ["AI", "Machine Learning"],
+      "description": "A deep dive into the future of AI and its potential impact on society."
+    },
+    {
+      "title": "Building Scalable Web Applications",
+      "speakers": ["John Doe", "Jane Smith"],
+      "category": ["Web Development", "Scalability"],
+      "description": "Learn how to build web applications that can handle millions of users."
+    },
+    {
+      "title": "Cybersecurity in the Modern Age",
+      "speakers": ["Dr. Alan Grant"],
+      "category": ["Cybersecurity"],
+      "description": "An overview of the latest threats and how to protect your systems."
+    },
+    {
+      "title": "The Power of Quantum Computing",
+      "speakers": ["Dr. Ian Malcolm"],
+      "category": ["Quantum Computing", "Physics"],
+      "description": "Exploring the mind-bending world of quantum computers and their potential."
+    },
+    {
+      "title": "Blockchain and Decentralized Finance",
+      "speakers": ["Satoshi Nakamoto"],
+      "category": ["Blockchain", "Finance"],
+      "description": "A look at the technology behind cryptocurrencies and the future of finance."
+    },
+    {
+      "title": "Human-Computer Interaction",
+      "speakers": ["Dr. Ellie Sattler"],
+      "category": ["HCI", "UX"],
+      "description": "Designing interfaces that are intuitive and user-friendly."
+    }
+  ]
+}
