@@ -1,0 +1,1 @@
+# baruk-event-talks-app
